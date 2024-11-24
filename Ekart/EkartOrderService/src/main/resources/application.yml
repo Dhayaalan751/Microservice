@@ -1,0 +1,42 @@
+server:
+  port: 9192
+
+
+spring:
+  application:
+    name: ORDER-SERVICE
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVER
+      name: db
+      fail-fast: true
+      retry:
+        initial-interval: 3000
+        multiplier: 1.3
+        max-interval: 20000
+        max-attempts: 20
+  config:
+    import:
+      -
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+
+
+
+
+
+
