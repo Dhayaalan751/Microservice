@@ -1,6 +1,10 @@
+server:
+  port: 9196
+
 spring:
   application:
-    name: CONFIG-SERVER
+    name: config-server
+
   profiles:
     active:
       - native
@@ -8,17 +12,14 @@ spring:
     config:
       server:
         native:
-          search-locations:
-            - file:///apps/los/
-
-server:
-  port: 9196
+          search-locations: file:///F:/Microservice/
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8762/eureka/
+    registry-fetch-interval-seconds: 10
   instance:
-    hostname: localhost    
+    ip-address: true
+    lease-renewal-interval-in-seconds: 10
+
+
+

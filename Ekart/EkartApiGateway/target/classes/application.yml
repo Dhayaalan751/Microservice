@@ -1,9 +1,16 @@
 spring:
   application:
-    name: GATEWAY-SERVICE
+    name: gateway-service
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       globalcors:
+        add-to-simple-url-handler-mapping: true
         corsConfigurations:
           '[/**]':
             allowedOrigins: "*"
@@ -16,15 +23,39 @@ spring:
               - PATCH
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      name: gateway-service
+      fail-fast: true
+      retry:
+        initial-interval: 3000
+        multiplier: 1.3
+        max-interval: 20000
+        max-attempts: 20
+  config:
+    import: "optional:configserver:"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 server:
   port: 8989
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registry-fetch-interval-seconds: 5
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    jms:
+      enabled: false
 
