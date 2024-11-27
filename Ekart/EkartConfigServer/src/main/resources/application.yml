@@ -1,25 +1,24 @@
 server:
-  port: 9196
+  port: 9196  # Specifies the port on which the Config Server will run (port 9196 in this case)
 
 spring:
   application:
-    name: config-server
+    name: config-server  # Name of the Spring Boot application, identifying it as the config-server application
 
   profiles:
     active:
-      - native
+      - native  # Specifies that the 'native' profile is active for the configuration, indicating a local file-based configuration store
+
   cloud:
     config:
       server:
         native:
-          search-locations: file:///F:/Microservice/
+          search-locations: file:///F:/Microservice/  # Path where the configuration files are stored locally, here in 'F:/Microservice/'
 
 eureka:
   client:
-    registry-fetch-interval-seconds: 10
+    registry-fetch-interval-seconds: 10  # Time interval (in seconds) for the Eureka client to refresh the registry from other Eureka servers
+
   instance:
-    ip-address: true
-    lease-renewal-interval-in-seconds: 10
-
-
-
+    ip-address: true  # Configures Eureka to register the instance using its IP address instead of the hostname
+    lease-renewal-interval-in-seconds: 10  # Time interval (in seconds) for Eureka to renew the lease on the instance, ensuring its registration stays active

@@ -1,14 +1,14 @@
 server:
-  port: 8761
+  port: 8761  # Specifies the port where the Eureka Server will run (port 8761 is the default)
 
 spring:
   application:
-    name: eureka-server
+    name: eureka-server  # Name of the Spring Boot application; this helps in identifying the application instance in the registry
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: false
-  instance:
-    prefer-ip-address: true
+    register-with-eureka: true  # Eureka Server registers itself with the Eureka registry as a client
+    fetch-registry: false  # The Eureka Server does not fetch the registry from other Eureka servers (ideal for standalone setup)
 
+  instance:
+    prefer-ip-address: true  # Eureka will use the server's IP address for registration instead of the hostname
